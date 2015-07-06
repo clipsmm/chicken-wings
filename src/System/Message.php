@@ -35,7 +35,7 @@ class Message {
         return false;
     }
 
-    public function hasError(){
+    public function hasErrors(){
         if (count($this->errors) > 0)
             return true;
 
@@ -60,5 +60,10 @@ class Message {
         $this->messages[$key] = $value;
 
         $_SESSION['MESSAGES'] = $this->messages;
+    }
+
+    public function errors()
+    {
+        return $this->errors;
     }
 }
