@@ -17,13 +17,9 @@ class Message {
 
     public function __construct()
     {
-        if (isset($_SESSION['MESSAGES'])){
-            $this->messages = $_SESSION['MESSAGES'];
-        }elseif(isset($_SESSION['ERRORS'])){
-            $this->messages = $this->errors = $_SESSION['ERRORS'];
-        }else{
-            $this->messages = null;
-        }
+
+        $this->messages = $_SESSION['MESSAGES'];
+        $this->errors = $_SESSION['ERRORS'];
 
         return $this;
     }
@@ -44,7 +40,9 @@ class Message {
 
     public function all()
     {
-        return $this->messages;
+        $msgs[] = $this->messages;
+        $msgs[] = $this->errors;
+        return $msgs;
     }
 
     public function get($key)
@@ -66,4 +64,6 @@ class Message {
     {
         return $this->errors;
     }
+
+
 }
