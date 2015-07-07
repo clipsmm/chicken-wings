@@ -18,8 +18,9 @@ class Message {
     public function __construct()
     {
 
-        $this->messages = $_SESSION['MESSAGES'];
-        $this->errors = $_SESSION['ERRORS'];
+        $this->messages = isset($_SESSION['MESSAGES'])? $_SESSION['MESSAGES'] : null;
+        $this->errors = isset($_SESSION['ERRORS'])? $_SESSION['ERRORS'] : null;
+
 
         return $this;
     }
@@ -63,6 +64,14 @@ class Message {
     public function errors()
     {
         return $this->errors;
+    }
+
+    public function clear()
+    {
+        unset($_SESSION['MESSAGES']);
+        unset($_SESSION['ERRORS']);
+
+        return true;
     }
 
 

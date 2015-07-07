@@ -16,12 +16,12 @@ class Redirect {
     public $previous;
     public $intended;
     public $data = array();
-    public $errors = array();
+    public $errors = null;
 
     public $home;
 
     public function __construct(){
-       return $this;
+        return $this;
     }
 
     public function next(){
@@ -38,8 +38,9 @@ class Redirect {
         return $this;
     }
 
-    public function withError($error){
-        $this->errors[] = $error;
+    public function withErrors(array $error){
+        $this->errors = $error;
+
 
         return $this;
     }
@@ -47,13 +48,14 @@ class Redirect {
     public function redirect($path = 'index.php')
     {
         $this->url =  $path;
-        session_start();
+        @session_start();
         $_SESSION['MESSAGES'] = array();
         $_SESSION['ERRORS'] = array();
         foreach ($this->data as $key => $value){
             $_SESSION['MESSAGES'][$key] = $value;
         }
         $_SESSION['ERRORS'] = $this->errors;
+        //dump($_SESSION);
 
 
         header("location: ".$this->url);
