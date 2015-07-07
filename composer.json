@@ -22,7 +22,7 @@
         "System": "src/"
       },
       "files": [
-        "libs/helpers.php"
+        "src/libs/helpers.php"
       ]
     }
 }
